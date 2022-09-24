@@ -12,7 +12,7 @@ import { createTheme } from '@mui/material/styles';
 import {
   Divider, Drawer, List, ListItem, ThemeProvider,
 } from '@mui/material';
-import LogoSvg from '../../public/logo.svg';
+import LogoSvg from '../logo.svg';
 
 export default function TopBar() {
   const navItems = ['Language', 'TopUp', 'SignIn'];

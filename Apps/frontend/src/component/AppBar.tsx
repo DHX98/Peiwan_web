@@ -5,13 +5,22 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
 import { createTheme } from '@mui/material/styles';
-import { ThemeProvider } from '@mui/material';
+import {
+  Divider, Drawer, List, ListItem, ThemeProvider,
+} from '@mui/material';
 import LogoSvg from '../../public/logo.svg';
 
 export default function TopBar() {
   const navItems = ['Language', 'TopUp', 'SignIn'];
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
 
   const theme1 = createTheme({
     palette: {
@@ -24,6 +33,24 @@ export default function TopBar() {
     },
   });
 
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+      <Typography variant="h6" sx={{ my: 2 }}>
+        <img alt="logo's svg" style={{ height: '8vh', width: '100%' }} src={LogoSvg} />
+      </Typography>
+      <Divider />
+      <List>
+        {navItems.map((item) => (
+          <ListItem key={item} disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }}>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
   return (
     <ThemeProvider theme={theme1}>
       <Box sx={{ display: 'flex' }}>
@@ -33,16 +60,16 @@ export default function TopBar() {
               color="inherit"
               aria-label="open drawer"
               edge="start"
-              onClick={() => { console.log('clicked'); }}
+              onClick={handleDrawerToggle}
               sx={{ mr: 2, display: { sm: 'none' } }}
             >
-              <MenuIcon />
+              <MenuIcon sx={{ padding: '20%' }} />
             </IconButton>
             <IconButton
               color="inherit"
               aria-label="open drawer"
               edge="start"
-              onClick={() => { console.log('clicked'); }}
+              onClick={handleDrawerToggle}
               sx={{ mr: 2, display: { sm: 'none' } }}
             >
               <img alt="logo's svg" style={{ height: '10vh', width: '100%' }} src={LogoSvg} />
@@ -60,6 +87,22 @@ export default function TopBar() {
                   {item}
                 </Button>
               ))}
+            </Box>
+            <Box component="nav">
+              <Drawer
+                variant="temporary"
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                ModalProps={{
+                  keepMounted: true, // Better open performance on mobile.
+                }}
+                sx={{
+                  display: { xs: 'block', sm: 'none' },
+                  '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 300 },
+                }}
+              >
+                {drawer}
+              </Drawer>
             </Box>
           </Toolbar>
         </AppBar>

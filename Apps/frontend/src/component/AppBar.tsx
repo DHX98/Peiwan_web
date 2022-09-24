@@ -36,7 +36,7 @@ export default function TopBar() {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        <img alt="logo's svg" style={{ height: '8vh', width: '100%' }} src={LogoSvg} />
+        <img alt="logo's svg" style={{ height: '8vh', width: '50%' }} src={LogoSvg} />
       </Typography>
       <Divider />
       <List>
@@ -98,7 +98,7 @@ export default function TopBar() {
                 }}
                 sx={{
                   display: { xs: 'block', sm: 'none' },
-                  '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 300 },
+                  '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
                 }}
               >
                 {drawer}

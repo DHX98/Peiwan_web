@@ -5,7 +5,7 @@ import TopBar from '../component/AppBar';
 
 export default function Home() {
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ width: '100%', overflow: 'hidden' }}>
       <TopBar />
 
       <Grid
@@ -21,7 +21,27 @@ export default function Home() {
           sx={{
             bgcolor: 'blue',
             width: '100%',
-            height: '60vh',
+            height: '100vh',
+          }}
+        />
+        <Grid
+          item
+          xs={12}
+          component={Box}
+          sx={{
+            bgcolor: 'yellow',
+            width: '100%',
+            height: '100vh',
+          }}
+        />
+        <Grid
+          item
+          xs={12}
+          component={Box}
+          sx={{
+            bgcolor: 'red',
+            width: '100%',
+            height: '100vh',
           }}
         />
       </Grid>

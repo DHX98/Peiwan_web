@@ -81,13 +81,16 @@ export default function TopBar() {
             >
               <img alt="logo's svg" style={{ height: '10vh', width: '40vw' }} src={LogoSvg} />
             </IconButton>
+
             <Typography
               variant="h6"
-              component="div"
-              sx={{ marginLeft: '10%', flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+              sx={{
+                my: 2, marginLeft: '10%', flexGrow: 1, display: { xs: 'none', sm: 'block' },
+              }}
             >
               PEIWAN
             </Typography>
+
             <Box sx={{ marginRight: '10%', display: { xs: 'none', sm: 'block' } }}>
               {navItems.map((item) => (
                 <Button component={Link} to={`/${item}`} disableRipple key={item} sx={{ color: '#000000' }}>

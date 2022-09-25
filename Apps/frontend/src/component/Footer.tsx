@@ -1,5 +1,4 @@
 import * as React from 'react';
-import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
@@ -23,7 +22,7 @@ export default function Footer() {
     <Box
       component="footer"
       sx={{
-        py: 3,
+        py: 2,
         px: 2,
         mt: 'auto',
         backgroundColor: (theme) => (theme.palette.mode === 'light'
@@ -31,7 +30,7 @@ export default function Footer() {
           : theme.palette.grey[800]),
       }}
     >
-      <Container maxWidth="sm">
+      <Container maxWidth="sm" sx={{ marginLeft: '20%' }}>
         <Typography variant="body1">
           My sticky footer can be found here.
         </Typography>

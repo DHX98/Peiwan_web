@@ -30,7 +30,7 @@ export default function Footer() {
           : theme.palette.grey[800]),
       }}
     >
-      <Container maxWidth="sm" sx={{ marginLeft: '20%' }}>
+      <Container maxWidth="sm">
         <Typography variant="body1">
           My sticky footer can be found here.
         </Typography>

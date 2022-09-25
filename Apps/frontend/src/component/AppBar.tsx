@@ -60,9 +60,8 @@ export default function TopBar() {
           color="primary"
           sx={{
             boxShadow: 0,
-            bgcolor: 'red',
-            width: '100%',
-            left: 0,
+            bgcolor: 'white',
+            width: '100vw',
           }}
         >
           <Toolbar>

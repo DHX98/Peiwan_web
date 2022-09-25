@@ -5,7 +5,8 @@ import {
 import SignIn from './pages/SignIn';
 import Home from './pages/Home';
 import './App.css';
-
+// Run in local network:
+// npm run dev -- --host
 export default function Router() {
   return (
     <BrowserRouter>

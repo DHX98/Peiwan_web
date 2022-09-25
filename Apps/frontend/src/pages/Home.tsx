@@ -7,15 +7,19 @@ import GameGallery from '../component/GameGallery';
 
 export default function Home() {
   return (
+
     <Box sx={{ width: '100%' }}>
-      <TopBar />
       <Grid
         container
         rowSpacing={1}
         columnSpacing={{ xs: 'auto', sm: 'auto', md: 'auto' }}
-        sx={{ width: '100vw', margin: '0', overflow: 'hidden' }}
+        sx={{ width: '100%', margin: '0', overflow: 'hidden' }}
         justifyContent="center"
       >
+        <Grid item xs={12}>
+          <TopBar />
+        </Grid>
+
         <Grid
           item
           xs={12}

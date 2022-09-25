@@ -9,6 +9,14 @@ import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material';
 import LolLogo from '../icons/LoL_icon.svg';
 import OverWatchLogo from '../icons/OverWatch_icon.svg';
+import ApexLogo from '../icons/apex-legends-1.svg';
+import CodLogo from '../icons/call-of-duty.svg';
+import CSGOLogo from '../icons/counter-strike-global-offensive-2.svg';
+import DOTALogo from '../icons/dota-2-seeklogo.com.svg';
+import GenshinLogo from '../icons/Genshin_Impact_logo.svg';
+import OriginLogo from '../icons/origin-4.svg';
+import Rainbow6Logo from '../icons/rainbow-6-siege-1.svg';
+import SteamLogo from '../icons/steam-icon-logo.svg';
 
 const themeFont = createTheme({
   typography: {
@@ -38,23 +46,41 @@ export default function GameGallery() {
       title: 'OVERWATCH',
     },
     {
-      img: LolLogo,
-      title: 'LOL',
+      img: ApexLogo,
+      title: 'APEX',
     },
     {
-      img: LolLogo,
-      title: 'LOL',
+      img: CodLogo,
+      title: 'COD',
     },
     {
-      img: LolLogo,
-      title: 'LOL',
+      img: CSGOLogo,
+      title: 'CSGO',
     },
-
+    {
+      img: DOTALogo,
+      title: 'DOTA',
+    },
+    {
+      img: GenshinLogo,
+      title: 'GENSHIN',
+    },
+    {
+      img: OriginLogo,
+      title: 'ORIGIN',
+    },
+    {
+      img: Rainbow6Logo,
+      title: 'R6',
+    },
+    {
+      img: SteamLogo,
+      title: 'STEAM',
+    },
   ];
 
   return (
     <ThemeProvider theme={themeFont}>
-
       <Grid
         item
         xs={12}

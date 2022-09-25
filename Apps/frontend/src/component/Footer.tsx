@@ -8,8 +8,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="/">
+        PEIWAN
       </Link>
       {' '}
       {new Date().getFullYear()}
@@ -32,9 +32,15 @@ export default function Footer() {
     >
       <Container maxWidth="sm">
         <Typography variant="body1">
-          My sticky footer can be found here.
+          PEIWAN | 本页面所有内容最终解释权归PEIWAN所有
         </Typography>
         <Copyright />
+        <Typography variant="body2" color="text.secondary">
+          {'Designed by '}
+          <Link color="inherit" href="/">
+            Hx,Zy
+          </Link>
+        </Typography>
       </Container>
     </Box>
   );

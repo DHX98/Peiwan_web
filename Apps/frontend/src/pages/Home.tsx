@@ -1,7 +1,10 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import TopBar from '../component/AppBar';
+import first_bg from '../../public/wp9637367-no-copyright-wallpapers.jpg';
+// https://wallpapercave.com/no-copyright-wallpapers
 
 export default function Home() {
   return (
@@ -18,12 +21,20 @@ export default function Home() {
           item
           xs={12}
           component={Box}
+          style={{ background: `url(${first_bg})` }}
           sx={{
             bgcolor: 'blue',
             width: '100%',
             height: '100vh',
+
           }}
-        />
+        >
+          <Stack spacing={2}>
+            <div>Item 1</div>
+            <div>Item 2</div>
+            <div>Item 3</div>
+          </Stack>
+        </Grid>
         <Grid
           item
           xs={12}

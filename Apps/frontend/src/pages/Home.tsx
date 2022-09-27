@@ -1,40 +1,28 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import TopBar from '../component/AppBar';
-import first_bg from '../../public/wp9637367-no-copyright-wallpapers.jpg';
-// https://wallpapercave.com/no-copyright-wallpapers
+import Footer from '../component/Footer';
+import GameGallery from '../component/GameGallery';
+import IntroductionBlueBox from '../component/IntroductionBlueBox';
 
 export default function Home() {
   return (
-    <Box sx={{ width: '100%', overflow: 'hidden' }}>
+
+    <Box sx={{ width: '100%' }}>
       <TopBar />
 
       <Grid
         container
         rowSpacing={1}
         columnSpacing={{ xs: 'auto', sm: 'auto', md: 'auto' }}
-        sx={{ width: '100%', margin: '0' }}
+        sx={{ width: '100%', margin: '0', overflow: 'hidden' }}
+        justifyContent="center"
       >
-        <Grid
-          item
-          xs={12}
-          component={Box}
-          style={{ background: `url(${first_bg})` }}
-          sx={{
-            bgcolor: 'blue',
-            width: '100%',
-            height: '100vh',
 
-          }}
-        >
-          <Stack spacing={2}>
-            <div>Item 1</div>
-            <div>Item 2</div>
-            <div>Item 3</div>
-          </Stack>
-        </Grid>
+        <IntroductionBlueBox />
+
+        <GameGallery />
         <Grid
           item
           xs={12}
@@ -45,6 +33,7 @@ export default function Home() {
             height: '100vh',
           }}
         />
+
         <Grid
           item
           xs={12}
@@ -56,7 +45,7 @@ export default function Home() {
           }}
         />
       </Grid>
-
+      <Footer />
     </Box>
   );
 }

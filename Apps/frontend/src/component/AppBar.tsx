@@ -12,6 +12,7 @@ import { createTheme } from '@mui/material/styles';
 import {
   Divider, Drawer, List, ListItem, ThemeProvider,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import LogoSvg from '../logo.svg';
 
 export default function TopBar() {
@@ -42,7 +43,7 @@ export default function TopBar() {
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
+            <ListItemButton component={Link} to="/signin" sx={{ textAlign: 'center' }}>
               <ListItemText primary={item} />
             </ListItemButton>
           </ListItem>
@@ -53,8 +54,16 @@ export default function TopBar() {
 
   return (
     <ThemeProvider theme={theme1}>
-      <Box sx={{ display: 'flex' }}>
-        <AppBar component="nav" color="primary">
+      <Box sx={{ display: 'flex', boxShadow: 0 }}>
+        <AppBar
+          component="nav"
+          color="primary"
+          sx={{
+            boxShadow: 0,
+            bgcolor: 'white',
+            width: '100vw',
+          }}
+        >
           <Toolbar>
             <IconButton
               color="inherit"
@@ -72,18 +81,21 @@ export default function TopBar() {
               onClick={handleDrawerToggle}
               sx={{ mr: 2, display: { sm: 'none' } }}
             >
-              <img alt="logo's svg" style={{ height: '10vh', width: '100%' }} src={LogoSvg} />
+              <img alt="logo's svg" style={{ height: '10vh', width: '40vw' }} src={LogoSvg} />
             </IconButton>
+
             <Typography
               variant="h6"
-              component="div"
-              sx={{ marginLeft: '10%', flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+              sx={{
+                my: 2, marginLeft: '10%', flexGrow: 1, display: { xs: 'none', sm: 'block' },
+              }}
             >
               PEIWAN
             </Typography>
+
             <Box sx={{ marginRight: '10%', display: { xs: 'none', sm: 'block' } }}>
               {navItems.map((item) => (
-                <Button disableRipple key={item} sx={{ color: '#000000' }}>
+                <Button component={Link} to={`/${item}`} disableRipple key={item} sx={{ color: '#000000' }}>
                   {item}
                 </Button>
               ))}

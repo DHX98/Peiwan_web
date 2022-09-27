@@ -109,9 +109,14 @@ export default function GameGallery() {
             坐标海外华人陪聊娱乐
           </Typography>
 
-          <ImageList cols={5} rowHeight="auto" gap={100}>
+          <ImageList cols={5} rowHeight="auto">
             {itemData.map((item) => (
-              <ImageListItem key={item.img}>
+              <ImageListItem
+                key={item.img}
+                sx={{
+                  p: 1,
+                }}
+              >
                 <img
                   style={{ height: 60, width: 60 }}
                   src={`${item.img}`}

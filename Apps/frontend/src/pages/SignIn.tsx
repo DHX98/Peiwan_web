@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props: any) {
   return (
@@ -31,6 +32,8 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignIn() {
+  const navigate = useNavigate();
+
   // ES6 arrow function
   // Promise asy
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -40,6 +43,8 @@ export default function SignIn() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    // fetch token from backend server
+    // why then ??? promise https://youtu.be/RvYYCGs45L4
     fetch(`http://localhost:8080/signin?email=${data.get('email')}&password=${data.get('password')}`, {
       method: 'get',
       mode: 'cors',
@@ -48,7 +53,11 @@ export default function SignIn() {
       },
     })
       .then((res) => res.json())
-      .then((result) => { console.log(result); });
+      .then((result) => {
+        console.log(result);
+        localStorage.setItem('token', result.token);
+        navigate('/');
+      });
   };
 
   return (

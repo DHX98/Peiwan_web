@@ -4,59 +4,175 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import BlueBoxBg from '../icons/blueboxbg.jpeg';
 import BlueBoxBgCellPhone from '../icons/BlueBoxBg_cellphone_size.png';
+import md_BlueBoxBg from '../icons/md_bluebox_bg.png';
 
 export default function IntroductionBlueBox() {
   return (
-    <Grid
-      item
-      xs={12}
-      component={Box}
-      sx={{
-        bgcolor: 'white',
-        width: '100vw',
-        height: '100vh',
-      }}
-      style={{
-        backgroundImage: `url(${BlueBoxBg})`,
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-      }}
-    >
-      <Box
+    <div>
+      <Grid
+        item
+        xs={12}
+        component={Box}
         sx={{
-          display: {
-            xs: 'none', md: 'inline', lg: 'inline', xl: 'inline',
-          },
-
+          bgcolor: 'white',
+          width: '100vw',
+          height: '100vh',
         }}
-        justifyContent="center"
-
+        style={{
+          backgroundImage: `url(${BlueBoxBg})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+        display={{
+          xs: 'none', md: 'none', lg: 'block', xl: 'block',
+        }}
       >
-        TODO:居中这里
-        <Typography
-          variant="h6"
+        <Box
           sx={{
-            my: 2, flexGrow: 1, display: { xs: 'none', sm: 'block' },
+            display: {
+              xs: 'none', md: 'none', lg: 'inline', xl: 'inline',
+            },
+
+          }}
+          justifyContent="center"
+        >
+          <Typography
+            variant="h1"
+            align="center"
+            sx={{
+              paddingTop: '10%',
+              my: 2,
+              flexGrow: 1,
+            }}
+          >
+            海外大型华人陪玩平台
+          </Typography>
+          <Typography
+            variant="h4"
+            align="center"
+            sx={{
+              paddingLeft: '10%',
+              paddingRight: '10%',
+              my: 2,
+              flexGrow: 1,
+            }}
+          >
+            不再一人孤独地游戏！
+          </Typography>
+        </Box>
+      </Grid>
+
+      <Grid
+        item
+        xs={12}
+        component={Box}
+        sx={{
+          bgcolor: 'white',
+          width: '100vw',
+          height: '100vh',
+        }}
+        style={{
+          backgroundImage: `url(${md_BlueBoxBg})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+        display={{
+          xs: 'none', md: 'block', lg: 'none', xl: 'none',
+        }}
+      >
+
+        <Box
+          sx={{
+            display: {
+              xs: 'none', md: 'inline', lg: 'none', xl: 'none',
+            },
+          }}
+          justifyContent="center"
+        >
+
+          <Typography
+            variant="h2"
+            align="center"
+            sx={{
+              paddingTop: '15%',
+              my: 2,
+              flexGrow: 1,
+            }}
+          >
+            海外大型华人陪玩平台
+          </Typography>
+          <Typography
+            variant="h4"
+            align="center"
+            sx={{
+              paddingLeft: '10%',
+              paddingRight: '10%',
+              my: 2,
+              flexGrow: 1,
+            }}
+          >
+            不再一人孤独地游戏！
+          </Typography>
+        </Box>
+      </Grid>
+
+      <Grid
+        item
+        xs={12}
+        component={Box}
+        sx={{
+          bgcolor: 'white',
+          width: '100vw',
+          height: '100vh',
+        }}
+        style={{
+          backgroundImage: `url(${BlueBoxBgCellPhone})`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+        display={{
+          xs: 'block', md: 'none', lg: 'none', xl: 'none',
+        }}
+      >
+
+        <Box
+          sx={{
+            display: {
+              xs: 'inline', md: 'none', lg: 'none', xl: 'none',
+            },
+          }}
+          justifyContent="center"
+        />
+        <Typography
+          variant="h2"
+          align="center"
+          sx={{
+            paddingLeft: '10%',
+            paddingRight: '10%',
+            paddingTop: '30%',
+            my: 2,
+            flexGrow: 1,
           }}
         >
-          这里要居中
+          海外大型华人陪玩平台
         </Typography>
-      </Box>
+        <Typography
+          variant="h4"
+          align="center"
+          sx={{
+            paddingLeft: '10%',
+            paddingRight: '10%',
+            my: 2,
+            flexGrow: 1,
+          }}
+        >
+          不再一人孤独地游戏！
+        </Typography>
 
-      TODO:加一个md屏幕尺寸的bg
-
-      TODO:把下面的BOX改成和lg一样的
-
-      <Box sx={{
-        display: {
-          xs: 'inline', md: 'none', lg: 'none', xl: 'none',
-        },
-      }}
-      >
-        <img src={BlueBoxBgCellPhone} alt={BlueBoxBgCellPhone} height="100%" width="100%" />
-      </Box>
-
-    </Grid>
+      </Grid>
+    </div>
   );
 }

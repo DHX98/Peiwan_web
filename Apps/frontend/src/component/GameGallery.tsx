@@ -109,7 +109,7 @@ export default function GameGallery() {
             坐标海外华人陪聊娱乐
           </Typography>
 
-          <ImageList cols={4} rowHeight="auto" gap={30}>
+          <ImageList cols={5} rowHeight="auto" gap={100}>
             {itemData.map((item) => (
               <ImageListItem key={item.img}>
                 <img

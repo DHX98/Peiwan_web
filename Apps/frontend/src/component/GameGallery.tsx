@@ -9,13 +9,13 @@ import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material';
 import LolLogo from '../icons/LoL_icon.svg';
 import OverWatchLogo from '../icons/OverWatch_icon.svg';
-import ApexLogo from '../icons/apex-legends-1.svg';
-import CodLogo from '../icons/call-of-duty.svg';
-import CSGOLogo from '../icons/counter-strike-global-offensive-2.svg';
+import ApexLogo from '../icons/Apex.png';
+import CodLogo from '../icons/COD.png';
+import CSGOLogo from '../icons/CSGO.png';
 import DOTALogo from '../icons/dota-2-seeklogo.com.svg';
-import GenshinLogo from '../icons/Genshin_Impact_logo.svg';
-import OriginLogo from '../icons/origin-4.svg';
-import Rainbow6Logo from '../icons/rainbow-6-siege-1.svg';
+import GenshinLogo from '../icons/GenShin.png';
+import OriginLogo from '../icons/Origin.png';
+import Rainbow6Logo from '../icons/R6.png';
 import SteamLogo from '../icons/steam-icon-logo.svg';
 
 const themeFont = createTheme({

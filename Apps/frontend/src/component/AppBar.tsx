@@ -12,17 +12,29 @@ import { createTheme } from '@mui/material/styles';
 import {
   Divider, Drawer, List, ListItem, ThemeProvider,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import CloseIcon from '@mui/icons-material/Close';
 import LogoSvg from '../logo.svg';
 
 export default function TopBar() {
   const navItems = ['Language', 'TopUp', 'SignIn'];
+  const navItemsSignedIn = ['Language', 'TopUp', 'SignOut'];
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  const handleNavs = (item:string) => {
+    if (item === 'SignOut') {
+      localStorage.removeItem('token');
+      navigate('/');
+    }
+    if (item === 'SignIn') {
+      navigate('/signin');
+    }
+  };
   const theme1 = createTheme({
     palette: {
       primary: {
@@ -33,16 +45,17 @@ export default function TopBar() {
       },
     },
   });
-
+  const token = localStorage.getItem('token');
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
         <img alt="logo's svg" style={{ height: '8vh', width: '50%' }} src={LogoSvg} />
+        <CloseIcon sx={{ height: '8vh' }} />
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item}>
             <ListItemButton component={Link} to="/signin" sx={{ textAlign: 'center' }}>
               <ListItemText primary={item} />
             </ListItemButton>
@@ -94,15 +107,22 @@ export default function TopBar() {
             </Typography>
 
             <Box sx={{ marginRight: '10%', display: { xs: 'none', sm: 'block' } }}>
-              {navItems.map((item) => (
-                <Button component={Link} to={`/${item}`} disableRipple key={item} sx={{ color: '#000000' }}>
-                  {item}
-                </Button>
-              ))}
+              {/* conditional render */}
+              {!token
+                ? navItems.map((item) => (
+                  <Button onClick={() => handleNavs(item)} disableRipple key={item} sx={{ color: '#000000' }}>
+                    {item}
+                  </Button>
+                )) : navItemsSignedIn.map((item) => (
+                  <Button onClick={() => handleNavs(item)} disableRipple key={item} sx={{ color: '#000000' }}>
+                    {item}
+                  </Button>
+                ))}
             </Box>
             <Box component="nav">
               <Drawer
                 variant="temporary"
+                anchor="top"
                 open={mobileOpen}
                 onClose={handleDrawerToggle}
                 ModalProps={{
@@ -110,7 +130,7 @@ export default function TopBar() {
                 }}
                 sx={{
                   display: { xs: 'block', sm: 'none' },
-                  '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
+                  '& .MuiDrawer-paper': { boxSizing: 'border-box', width: '100%' },
                 }}
               >
                 {drawer}

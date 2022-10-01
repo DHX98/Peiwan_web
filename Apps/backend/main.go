@@ -33,7 +33,7 @@ func main() {
 		password := c.Query("password")
 		if email == password {
 			c.JSON(200, gin.H{
-				"message": "logged in",
+				"token": "loggedIn",
 			})
 		} else {
 			c.JSON(200, gin.H{

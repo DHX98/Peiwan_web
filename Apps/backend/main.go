@@ -17,7 +17,11 @@ func main() {
 	r := gin.Default()
 	r.Use(cors.Default())
 
-	r.GET("/ping", controllers.PostsCreate)
-	r.POST("/createpost", controllers.PostsCreate)
+	r.POST("/users", controllers.UsersCreate)
+	r.PUT("/users/:id", controllers.UsersUpdate)
+	r.GET("/users", controllers.UsersAll)
+	r.GET("/users/:id", controllers.UsersGetById)
+	r.DELETE("/users/:id", controllers.UsersDelete)
+
 	r.Run()
 }

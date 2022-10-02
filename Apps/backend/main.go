@@ -5,7 +5,6 @@ import (
 	"github.com/DHX98/Peiwan_web/Apps/backend/routes"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"log"
 )
 
 func init() {
@@ -20,9 +19,5 @@ func main() {
 
 	//Routes for users
 	routes.UserRoute(r)
-
-	err := r.Run()
-	if err != nil {
-		log.Fatal("Gin run failed", err)
-	}
+	r.Run()
 }

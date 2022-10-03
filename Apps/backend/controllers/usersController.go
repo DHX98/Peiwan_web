@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"github.com/DHX98/Peiwan_web/Apps/backend/initializers"
 	"github.com/DHX98/Peiwan_web/Apps/backend/models"
 	"github.com/gin-gonic/gin"
@@ -14,7 +13,7 @@ func UsersCreate(c *gin.Context) {
 		PassWord string
 	}
 	c.Bind(&body)
-	fmt.Println(body)
+
 	//Create a user
 	user := models.User{Email: body.Email, PassWord: body.PassWord}
 	result := initializers.DB.Create(&user) // pass pointer of data to Create
@@ -93,11 +92,10 @@ func UsersLogIn(c *gin.Context) {
 		PassWord string
 	}
 	c.Bind(&body)
-	fmt.Println(body)
 	//Find the user by Email
 	user := models.User{Email: body.Email, PassWord: body.PassWord}
-	result := initializers.DB.Where(&models.User{Email: user.Email, PassWord: user.PassWord}).First(&user) // pass pointer of data to Create
-	fmt.Println(user)
+
+	result := initializers.DB.Where(&models.User{Email: body.Email, PassWord: body.PassWord}).First(&user) // pass pointer of data to Create
 
 	if result.Error != nil {
 		c.JSON(401, gin.H{

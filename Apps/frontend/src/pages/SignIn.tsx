@@ -34,30 +34,31 @@ const theme = createTheme();
 
 export default function SignIn() {
   const navigate = useNavigate();
-
-  // ES6 arrow function
-  // Promise asy
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    // fetch token from backend server
-    // why then ??? promise https://youtu.be/RvYYCGs45L4
-    fetch(`http://localhost:8080/signin?email=${data.get('email')}&password=${data.get('password')}`, {
-      method: 'get',
+
+    fetch('http://localhost:3000/users/login', {
+      method: 'post',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        Email: data.get('email'),
+        PassWord: data.get('password'),
+      }),
     })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        localStorage.setItem('token', result.token);
-        navigate('/');
+      .then((res) => {
+        if (res.status === 401) {
+          alert('password not matched or not signed up');
+        } else {
+          res.json().then((result) => {
+            console.log(result);
+            localStorage.setItem('token', result.token);
+            navigate('/');
+          });
+        }
       });
   };
 

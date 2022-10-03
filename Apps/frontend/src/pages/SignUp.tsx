@@ -14,6 +14,7 @@ import signup_bg from '../icons/signup_bg.jpg';
 
 function Copyright(props: any) {
   return (
+  // eslint-disable-next-line react/jsx-props-no-spreading
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
@@ -32,16 +33,16 @@ export default function SignUp() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-    fetch(`http://localhost:8080/signup?email=${data.get('email')}&password=${data.get('password')}`, {
-      method: 'get',
+    fetch('http://localhost:3000/users', {
+      method: 'post',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        Email: data.get('email'),
+        PassWord: data.get('password'),
+      }),
     })
       .then((res) => res.json())
       .then((result) => { console.log(result); });

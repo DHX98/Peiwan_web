@@ -11,4 +11,6 @@ func UserRoute(r *gin.Engine) {
 	r.GET("/users", controllers.UsersAll)
 	r.GET("/users/:id", controllers.UsersGetById)
 	r.DELETE("/users/:id", controllers.UsersDelete)
+	r.POST("/users/login", controllers.UsersLogIn)
+
 }

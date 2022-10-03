@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/DHX98/Peiwan_web/Apps/backend/initializers"
 	"github.com/DHX98/Peiwan_web/Apps/backend/models"
 	"github.com/gin-gonic/gin"
@@ -9,13 +10,13 @@ import (
 func UsersCreate(c *gin.Context) {
 	//Get data off req Body
 	var body struct {
-		UserName string
+		Email    string
 		PassWord string
 	}
 	c.Bind(&body)
-
+	fmt.Println(body)
 	//Create a user
-	user := models.User{UserName: body.UserName, PassWord: body.PassWord}
+	user := models.User{Email: body.Email, PassWord: body.PassWord}
 	result := initializers.DB.Create(&user) // pass pointer of data to Create
 	if result.Error != nil {
 		c.Status(400)
@@ -23,7 +24,8 @@ func UsersCreate(c *gin.Context) {
 	}
 	//Return it
 	c.JSON(200, gin.H{
-		"user": user,
+		"user":  user,
+		"token": "123123dasd",
 	})
 
 }
@@ -82,4 +84,31 @@ func UsersDelete(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"delete": "success",
 	})
+}
+
+func UsersLogIn(c *gin.Context) {
+	//Get data off req Body
+	var body struct {
+		Email    string
+		PassWord string
+	}
+	c.Bind(&body)
+	fmt.Println(body)
+	//Find the user by Email
+	user := models.User{Email: body.Email, PassWord: body.PassWord}
+	result := initializers.DB.Where(&models.User{Email: user.Email, PassWord: user.PassWord}).First(&user) // pass pointer of data to Create
+	fmt.Println(user)
+
+	if result.Error != nil {
+		c.JSON(401, gin.H{
+			"password not matched or not signed up": "True",
+		})
+		return
+	}
+	//Return it
+	c.JSON(200, gin.H{
+		"user":  user,
+		"token": "123123dasd",
+	})
+
 }

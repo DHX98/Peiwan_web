@@ -1,0 +1,6 @@
+Using MVC architecture
+Backend handle Model & Controller
+Frontend handle View
+
+BE structure div:
+    -Model

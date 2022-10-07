@@ -4,6 +4,7 @@ import (
 	"github.com/DHX98/Peiwan_web/Apps/backend/initializers"
 	"github.com/DHX98/Peiwan_web/Apps/backend/models"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func UsersCreate(c *gin.Context) {
@@ -13,9 +14,10 @@ func UsersCreate(c *gin.Context) {
 		PassWord string
 	}
 	c.Bind(&body)
+	hashedPassword, _ := bcrypt.GenerateFromPassword([]byte(body.PassWord), bcrypt.DefaultCost)
 
 	//Create a user
-	user := models.User{Email: body.Email, PassWord: body.PassWord}
+	user := models.User{Email: body.Email, PassWord: body.PassWord, HashedPassWord: string(hashedPassword)}
 	result := initializers.DB.Create(&user) // pass pointer of data to Create
 	if result.Error != nil {
 		c.Status(400)
@@ -93,16 +95,17 @@ func UsersLogIn(c *gin.Context) {
 	}
 	c.Bind(&body)
 	//Find the user by Email
-	user := models.User{Email: body.Email, PassWord: body.PassWord}
+	user := models.User{}
+	initializers.DB.Where(&models.User{Email: body.Email}).Find(&user) // pass pointer of data to Create
+	re := bcrypt.CompareHashAndPassword([]byte(user.HashedPassWord), []byte(body.PassWord))
 
-	result := initializers.DB.Where(&models.User{Email: body.Email, PassWord: body.PassWord}).First(&user) // pass pointer of data to Create
-
-	if result.Error != nil {
+	if re != nil {
 		c.JSON(401, gin.H{
-			"password not matched or not signed up": "True",
+			"password not matched or not signed in": "True",
 		})
 		return
 	}
+
 	//Return it
 	c.JSON(200, gin.H{
 		"user":  user,

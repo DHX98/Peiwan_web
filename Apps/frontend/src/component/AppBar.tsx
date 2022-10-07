@@ -12,7 +12,7 @@ import { createTheme } from '@mui/material/styles';
 import {
   Divider, Drawer, List, ListItem, ThemeProvider,
 } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import LogoSvg from '../logo.svg';
 
@@ -54,9 +54,15 @@ export default function TopBar() {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
+        {token ? navItemsSignedIn.map((item) => (
           <ListItem key={item}>
-            <ListItemButton component={Link} to="/signin" sx={{ textAlign: 'center' }}>
+            <ListItemButton onClick={() => handleNavs(item)} sx={{ textAlign: 'center' }}>
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        )) : navItems.map((item) => (
+          <ListItem key={item}>
+            <ListItemButton onClick={() => handleNavs(item)} sx={{ textAlign: 'center' }}>
               <ListItemText primary={item} />
             </ListItemButton>
           </ListItem>

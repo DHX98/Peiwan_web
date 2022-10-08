@@ -7,7 +7,8 @@ import (
 )
 
 func UserRoute(r *gin.Engine) {
-	r.Use(middleware.AuthMiddleware())
+	//r.Use(middleware.AuthMiddleware())
+	//make all r's services using AuthMiddleware
 	r.POST("/users", controllers.UsersCreate)
 	r.PUT("/users/:id", controllers.UsersUpdate)
 	r.GET("/users", middleware.AuthMiddleware(), controllers.UsersAll)

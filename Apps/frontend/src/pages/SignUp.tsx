@@ -51,11 +51,16 @@ export default function SignUp() {
         PassWord: data.get('password'),
       }),
     })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        localStorage.setItem('token', result.token);
-        navigate('/');
+      .then((res) => {
+        if (res.status === 400) {
+          alert('This email already signed up');
+        } else {
+          res.json().then((result) => {
+            console.log(result);
+            localStorage.setItem('token', result.token);
+            navigate('/');
+          });
+        }
       });
   };
 

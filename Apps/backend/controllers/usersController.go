@@ -7,6 +7,7 @@ import (
 	"github.com/DHX98/Peiwan_web/Apps/backend/services"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
+	"strings"
 )
 
 func UsersCreate(c *gin.Context) {
@@ -22,15 +23,27 @@ func UsersCreate(c *gin.Context) {
 	user := models.User{Email: body.Email, PassWord: body.PassWord, HashedPassWord: string(hashedPassword)}
 	result := initializers.DB.Create(&user) // pass pointer of data to Create
 	if result.Error != nil {
-		c.Status(400)
+		if strings.Contains(result.Error.Error(), "23505") {
+			c.JSON(400, gin.H{
+				"error": "email is unique",
+			})
+		}
+		return
+	}
+	token, err := services.ReleaseToken(user)
+
+	if err != nil {
+		c.JSON(500, gin.H{
+			"server": "error",
+		})
+		fmt.Println(err)
 		return
 	}
 	//Return it
 	c.JSON(200, gin.H{
 		"user":  user,
-		"token": "123123dasd",
+		"token": token,
 	})
-
 }
 
 func UsersAll(c *gin.Context) {

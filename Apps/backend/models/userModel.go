@@ -7,7 +7,7 @@ import (
 type User struct {
 	gorm.Model
 	UserName       string
-	PassWord       string
+	PassWord       string `gorm:"size:255;not null"`
 	HashedPassWord string `gorm:"size:255;not null"`
-	Email          string
+	Email          string `gorm:"varchar(110);not null;unique"`
 }

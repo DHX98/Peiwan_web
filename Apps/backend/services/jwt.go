@@ -4,7 +4,7 @@ package services
 
 import (
 	"github.com/DHX98/Peiwan_web/Apps/backend/models"
-	"github.com/dgrijalva/jwt-go"
+	"github.com/golang-jwt/jwt/v4"
 	"time"
 )
 

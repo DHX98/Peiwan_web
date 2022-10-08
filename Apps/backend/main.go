@@ -30,5 +30,5 @@ func main() {
 
 	//Routes for users
 	routes.UserRoute(r)
-	r.Run(port)
+	r.Run(":" + port)
 }

@@ -1,8 +1,10 @@
 package controllers
 
 import (
+	"fmt"
 	"github.com/DHX98/Peiwan_web/Apps/backend/initializers"
 	"github.com/DHX98/Peiwan_web/Apps/backend/models"
+	"github.com/DHX98/Peiwan_web/Apps/backend/services"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -106,10 +108,18 @@ func UsersLogIn(c *gin.Context) {
 		return
 	}
 
+	token, err := services.ReleaseToken(user)
+	if err != nil {
+		c.JSON(500, gin.H{
+			"server": "error",
+		})
+		fmt.Println(err)
+		return
+	}
 	//Return it
 	c.JSON(200, gin.H{
 		"user":  user,
-		"token": "123123dasd",
+		"token": token,
 	})
 
 }

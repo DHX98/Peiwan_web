@@ -34,11 +34,14 @@ const theme = createTheme();
 
 export default function SignIn() {
   const navigate = useNavigate();
+  // GET Api HOST from .env
+  const Api = import.meta.env.VITE_HOST;
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    fetch('http://10.0.0.26:3000/users/login', {
+    fetch(`${Api}users/login`, {
       method: 'post',
       mode: 'cors',
       headers: {

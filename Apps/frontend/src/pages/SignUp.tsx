@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 import signup_bg from '../icons/signup_bg.jpg';
 
 function Copyright(props: any) {
@@ -30,10 +31,16 @@ function Copyright(props: any) {
 const theme = createTheme();
 
 export default function SignUp() {
+  // GET Api HOST from .env
+  const Api = import.meta.env.VITE_HOST;
+  // navigator
+  const navigate = useNavigate();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    fetch('http://localhost:3000/users', {
+
+    fetch(`${Api}users`, {
       method: 'post',
       mode: 'cors',
       headers: {
@@ -45,7 +52,11 @@ export default function SignUp() {
       }),
     })
       .then((res) => res.json())
-      .then((result) => { console.log(result); });
+      .then((result) => {
+        console.log(result);
+        localStorage.setItem('token', result.token);
+        navigate('/');
+      });
   };
 
   const mystyle = {

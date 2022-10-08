@@ -93,11 +93,12 @@ export default function GameGallery() {
         justifyContent="center"
         alignItems="center"
       >
-        <Stack spacing={4}>
+
+        <Stack
+          spacing={4}
+        >
           <Typography
             variant="h4"
-            sx={{
-            }}
           >
             热门游戏大神带你飞
           </Typography>
@@ -108,8 +109,7 @@ export default function GameGallery() {
           >
             坐标海外华人陪聊娱乐
           </Typography>
-
-          <ImageList cols={5} rowHeight="auto">
+          <ImageList cols={5} rowHeight="auto" gap={1}>
             {itemData.map((item) => (
               <ImageListItem
                 key={item.img}

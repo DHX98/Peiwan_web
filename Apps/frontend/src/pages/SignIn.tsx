@@ -38,7 +38,7 @@ export default function SignIn() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
-    fetch('http://localhost:3000/users/login', {
+    fetch('http://10.0.0.26:3000/users/login', {
       method: 'post',
       mode: 'cors',
       headers: {

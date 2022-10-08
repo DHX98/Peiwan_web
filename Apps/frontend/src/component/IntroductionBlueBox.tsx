@@ -41,7 +41,7 @@ export default function IntroductionBlueBox() {
             variant="h1"
             align="center"
             sx={{
-              paddingTop: '10%',
+              paddingTop: '20%',
               my: 2,
               flexGrow: 1,
             }}
@@ -152,7 +152,7 @@ export default function IntroductionBlueBox() {
           sx={{
             paddingLeft: '10%',
             paddingRight: '10%',
-            paddingTop: '30%',
+            paddingTop: '40%',
             my: 2,
             flexGrow: 1,
           }}

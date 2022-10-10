@@ -35,7 +35,7 @@ export default function SignIn() {
   const navigate = useNavigate();
   // GET Api HOST from .env
   const Api = import.meta.env.VITE_HOST;
-
+  console.log(`${Api}users/login`);
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);

@@ -137,7 +137,7 @@ export default function SignIn() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="/SignUp" variant="body2">
+                  <Link href="/signup" variant="body2">
                     没有帐号? 请点此注册
                   </Link>
                 </Grid>

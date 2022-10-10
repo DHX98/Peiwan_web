@@ -19,7 +19,7 @@ function Copyright(props: any) {
   // eslint-disable-next-line react/jsx-props-no-spreading
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" to="/">
         Your Website
       </Link>
       {' '}

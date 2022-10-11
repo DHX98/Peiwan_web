@@ -5,6 +5,7 @@ import TopBar from '../component/AppBar';
 import Footer from '../component/Footer';
 import GameGallery from '../component/GameGallery';
 import IntroductionBlueBox from '../component/IntroductionBlueBox';
+import YellowBox from '../component/YellowBox';
 
 export default function Home() {
   return (
@@ -23,16 +24,7 @@ export default function Home() {
         <IntroductionBlueBox />
 
         <GameGallery />
-        <Grid
-          item
-          xs={12}
-          component={Box}
-          sx={{
-            bgcolor: 'yellow',
-            width: '100%',
-            height: '100vh',
-          }}
-        />
+        <YellowBox />
 
         <Grid
           item

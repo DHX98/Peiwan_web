@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-  BrowserRouter, Route, Routes,
+  HashRouter, Route, Routes,
 } from 'react-router-dom';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
@@ -12,7 +12,9 @@ import ThreePlay from './pages/ThreePlay';
 
 export default function Router() {
   return (
-    <BrowserRouter basename={import.meta.env.REACT_HOST}>
+    <HashRouter
+      basename={import.meta.env.REACT_HOST}
+    >
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signin" element={<SignIn />} />
@@ -20,6 +22,7 @@ export default function Router() {
         <Route path="/threetest" element={<ThreePlay />} />
       </Routes>
 
-    </BrowserRouter>
+    </HashRouter>
+
   );
 }

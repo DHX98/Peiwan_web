@@ -77,7 +77,7 @@ export default function SignIn() {
   };
 
   const mystyle = {
-    paddingTop: '10%',
+    paddingTop: '5%',
     backgroundImage: `url(${signup_bg})`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
@@ -97,9 +97,10 @@ export default function SignIn() {
               alignItems: 'center',
               backgroundColor: 'white',
               border: '1px solid white',
-              borderRadius: '5px!important',
+              borderRadius: '15px!important',
               padding: '10%',
-              paddingBottom: '35%',
+              height: '80vh',
+              margin: '5%',
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -145,7 +146,7 @@ export default function SignIn() {
               <Button
                 fullWidth
                 variant="contained"
-                sx={{ mb: 3 }}
+                sx={{ mb: 1 }}
                 color="secondary"
                 href="https://discord.com/api/oauth2/authorize?client_id=1029832621712232489&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2F&response_type=code&scope=identify%20email"
               >
@@ -162,10 +163,11 @@ export default function SignIn() {
                     没有帐号? 请点此注册
                   </Link>
                 </Grid>
+
               </Grid>
+              <Copyright sx={{ mt: 8, mb: 1 }} />
             </Box>
           </Box>
-          <Copyright sx={{ mt: 8, mb: 4 }} />
         </Container>
       </div>
     </ThemeProvider>

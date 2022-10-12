@@ -29,9 +29,21 @@ function Copyright(props: any) {
   );
 }
 
-const theme = createTheme();
+const theme1 = createTheme({
+  palette: {
+    secondary: {
+      light: '#7289DA',
+      main: '#7289DA',
+      dark: '#7289DA',
+      contrastText: '#fff',
+    },
+  },
+});
 
 export default function SignIn() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code');
+  console.log(code);
   const navigate = useNavigate();
   // GET Api HOST from .env
   const Api = import.meta.env.VITE_HOST;
@@ -74,7 +86,7 @@ export default function SignIn() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme1}>
       <div style={mystyle}>
         <Container component="main" maxWidth="sm">
           <CssBaseline />
@@ -121,13 +133,23 @@ export default function SignIn() {
                 control={<Checkbox value="remember" color="primary" />}
                 label="记住我"
               />
+
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 1 }}
               >
                 登陆
+              </Button>
+              <Button
+                fullWidth
+                variant="contained"
+                sx={{ mb: 3 }}
+                color="secondary"
+                href="https://discord.com/api/oauth2/authorize?client_id=1029832621712232489&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2F&response_type=code&scope=identify%20email"
+              >
+                用discord登录
               </Button>
               <Grid container>
                 <Grid item xs>

@@ -3,7 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -29,8 +28,15 @@ function Copyright(props: any) {
 }
 
 const theme = createTheme();
+const theme2 = createTheme({
+  typography: {
+    fontSize: 12,
+  },
+});
 
 export default function SignUp() {
+  // Signup error hook
+  const [SignUpError, SetSignUpError] = React.useState(false);
   // GET Api HOST from .env
   const Api = import.meta.env.VITE_HOST;
   // navigator
@@ -53,7 +59,8 @@ export default function SignUp() {
     })
       .then((res) => {
         if (res.status === 400) {
-          alert('This email already signed up');
+          // alert('This email already signed up');
+          SetSignUpError(true);
         } else {
           res.json().then((result) => {
             console.log(result);
@@ -65,7 +72,7 @@ export default function SignUp() {
   };
 
   const mystyle = {
-    paddingTop: '10%',
+    paddingTop: '5%',
     backgroundImage: `url(${signup_bg})`,
     backgroundPosition: 'center',
     backgroundSize: 'cover',
@@ -85,22 +92,28 @@ export default function SignUp() {
               flexDirection: 'column',
               alignItems: 'center',
               backgroundColor: 'white',
+              boxShadow: 'none',
               border: '1px solid white',
-              borderRadius: '5px!important',
+              borderRadius: '15px!important',
               padding: '10%',
-              paddingBottom: '44%',
+              height: '80vh',
+              margin: '5%',
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
-              注册您的帐号
-            </Typography>
+            <ThemeProvider theme={theme2}>
+              <Typography component="h1" variant="h5">
+                注册您的帐号
+              </Typography>
+            </ThemeProvider>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
+                    error={SignUpError}
+                    helperText={SignUpError ? 'This email already signed up' : ''}
                     required
                     fullWidth
                     id="email"
@@ -111,6 +124,7 @@ export default function SignUp() {
                 </Grid>
                 <Grid item xs={12} sx={{ mt: 1 }}>
                   <TextField
+                    error={SignUpError}
                     required
                     fullWidth
                     name="password"
@@ -125,20 +139,20 @@ export default function SignUp() {
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
+                sx={{ mt: 3, mb: 1 }}
               >
                 确认注册
               </Button>
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Link to="/signin">
+                  <Link to="/signin" style={{ textDecoration: 'none' }}>
                     已有帐号?请点此登录
                   </Link>
                 </Grid>
               </Grid>
+              <Copyright sx={{ mt: 8, mb: 1 }} />
             </Box>
           </Box>
-          <Copyright sx={{ mt: 8, mb: 4 }} />
         </Container>
       </div>
     </ThemeProvider>

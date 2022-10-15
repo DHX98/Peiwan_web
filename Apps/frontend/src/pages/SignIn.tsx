@@ -40,7 +40,14 @@ const theme1 = createTheme({
   },
 });
 
+const theme2 = createTheme({
+  typography: {
+    fontSize: 12,
+  },
+});
+
 export default function SignIn() {
+  const [SignInError, SetSignInError] = React.useState(false);
   const urlParams = new URLSearchParams(window.location.search);
   const code = urlParams.get('code');
   console.log(code);
@@ -65,7 +72,8 @@ export default function SignIn() {
     })
       .then((res) => {
         if (res.status === 401) {
-          alert('password not matched or not signed up');
+          SetSignInError(true);
+          // alert('password not matched or not signed up');
         } else {
           res.json().then((result) => {
             console.log(result);
@@ -96,6 +104,7 @@ export default function SignIn() {
               flexDirection: 'column',
               alignItems: 'center',
               backgroundColor: 'white',
+              boxShadow: 'none',
               border: '1px solid white',
               borderRadius: '15px!important',
               padding: '10%',
@@ -106,26 +115,32 @@ export default function SignIn() {
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
-            <Typography component="h1" variant="h5">
-              登录
-            </Typography>
+            <ThemeProvider theme={theme2}>
+              <Typography component="h1" variant="h5">
+                登录
+              </Typography>
+            </ThemeProvider>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
               <TextField
+                error={SignInError}
+                helperText={SignInError ? 'Incorrect email.' : ''}
+                label="请输入您的邮箱"
                 margin="normal"
                 required
                 fullWidth
                 id="email"
-                label="请输入您的邮箱"
                 name="email"
                 autoComplete="email"
                 autoFocus
               />
               <TextField
+                error={SignInError}
+                helperText={SignInError ? 'Or incorrect password.' : ''}
+                label="请输入您的密码"
                 margin="normal"
                 required
                 fullWidth
                 name="password"
-                label="请输入您的密码"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -154,16 +169,15 @@ export default function SignIn() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link to="/">
+                  <Link to="/" style={{ textDecoration: 'none' }}>
                     忘记密码?
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link to="/signup">
+                  <Link to="/signup" style={{ textDecoration: 'none' }}>
                     没有帐号? 请点此注册
                   </Link>
                 </Grid>
-
               </Grid>
               <Copyright sx={{ mt: 8, mb: 1 }} />
             </Box>

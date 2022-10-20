@@ -34,9 +34,32 @@ const theme2 = createTheme({
   },
 });
 
+function ValidateEmail(inputText: string, SetEmailError:any) {
+  const mailformat = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  if (inputText.match(mailformat) || (inputText === '')) {
+    SetEmailError(false);
+    return true;
+  }
+  SetEmailError(true);
+  return false;
+}
+
+function ValidatePassword(inputText:string, SetPasswordError:any) {
+  if (inputText.length < 8) {
+    SetPasswordError(true);
+    return false;
+  }
+  SetPasswordError(false);
+  return true;
+}
+
 export default function SignUp() {
   // Signup error hook
   const [SignUpError, SetSignUpError] = React.useState(false);
+  // Email format error hook
+  const [EmailError, SetEmailError] = React.useState(false);
+  // Password format error hook
+  const [PasswordError, SetPasswordError] = React.useState(false);
   // GET Api HOST from .env
   const Api = import.meta.env.VITE_HOST;
   // navigator
@@ -45,30 +68,31 @@ export default function SignUp() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
-    fetch(`${Api}users`, {
-      method: 'post',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        Email: data.get('email'),
-        PassWord: data.get('password'),
-      }),
-    })
-      .then((res) => {
-        if (res.status === 400) {
+    if (ValidateEmail(data.get('email')!.toString(), SetEmailError) && ValidatePassword(data.get('password')!.toString(), SetPasswordError)) {
+      fetch(`${Api}users`, {
+        method: 'post',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          Email: data.get('email'),
+          PassWord: data.get('password'),
+        }),
+      })
+        .then((res) => {
+          if (res.status === 400) {
           // alert('This email already signed up');
-          SetSignUpError(true);
-        } else {
-          res.json().then((result) => {
-            console.log(result);
-            localStorage.setItem('token', result.token);
-            navigate('/');
-          });
-        }
-      });
+            SetSignUpError(true);
+          } else {
+            res.json().then((result) => {
+              console.log(result);
+              localStorage.setItem('token', result.token);
+              navigate('/');
+            });
+          }
+        });
+    }
   };
 
   const mystyle = {
@@ -112,8 +136,10 @@ export default function SignUp() {
               <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <TextField
-                    error={SignUpError}
-                    helperText={SignUpError ? 'This email already signed up' : ''}
+                    onChange={(event) => ValidateEmail(event.target.value, SetEmailError)}
+                    error={SignUpError || EmailError}
+                    // 'This email already signed up'
+                    helperText={(SignUpError && 'This email already signed up') || (EmailError && 'This email has wrong format')}
                     required
                     fullWidth
                     id="email"
@@ -124,7 +150,9 @@ export default function SignUp() {
                 </Grid>
                 <Grid item xs={12} sx={{ mt: 1 }}>
                   <TextField
-                    error={SignUpError}
+                    onChange={(event) => ValidatePassword(event.target.value, SetPasswordError)}
+                    error={PasswordError}
+                    helperText={PasswordError && 'The password is too short, the minimum length is 8 characters'}
                     required
                     fullWidth
                     name="password"
